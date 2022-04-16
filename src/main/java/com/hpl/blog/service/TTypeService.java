@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @author HPL
  * @since 2022-04-15
  */
-@Service
+
 public interface TTypeService extends IService<TType> {
 
 }

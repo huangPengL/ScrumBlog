@@ -4,6 +4,8 @@ import com.hpl.blog.entity.TBlog;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * <p>
  *  服务类
@@ -12,7 +14,8 @@ import org.springframework.stereotype.Service;
  * @author HPL
  * @since 2022-04-15
  */
-@Service
+
 public interface TBlogService extends IService<TBlog> {
 
+    Map<String,Object> findAllByPage(Long current, Long limit);
 }
