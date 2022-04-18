@@ -25,7 +25,7 @@ public class SwaggerConfig {
     @Bean
     public Docket webApiConfig(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("service_edu")
+                .groupName("HHHZBlog")
                 .apiInfo(webApiInfo())
                 .select()
                 .paths(Predicates.not(PathSelectors.regex("/admin/.*")))
@@ -36,8 +36,8 @@ public class SwaggerConfig {
 
     private ApiInfo webApiInfo(){
         return new ApiInfoBuilder()
-                .title("OnlineEdu网站-API文档")
-                .description("本文档描述了OnlineEdu微服务接口的定义")
+                .title("HHHZBlog网站-API文档")
+                .description("本文档描述了HHHZBlog微服务接口的定义")
                 .version("1.0")
                 .contact(new Contact("hpl", "http://hpl.com", "243031504@qq.com"))
                 .build();

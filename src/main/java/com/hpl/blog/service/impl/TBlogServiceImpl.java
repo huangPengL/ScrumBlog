@@ -7,9 +7,11 @@ import com.hpl.blog.entity.TBlog;
 import com.hpl.blog.mapper.TBlogMapper;
 import com.hpl.blog.service.TBlogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,5 +38,31 @@ public class TBlogServiceImpl extends ServiceImpl<TBlogMapper, TBlog> implements
         map.put("curSize", tBlogIPage.getRecords().size());
 
         return map;
+    }
+
+
+    @Override
+    public Map<String, Object> findAllByTypeID(String typeId, Long current, Long limit) {
+        Page<TBlog> page = new Page<>(current, limit);
+
+        QueryWrapper<TBlog> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("type_id", typeId);
+
+        IPage<TBlog> tBlogIPage = baseMapper.selectPage(page, queryWrapper);
+        // 封装结果
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", tBlogIPage.getTotal());
+        map.put("blogList", tBlogIPage.getRecords());
+        map.put("curSize", tBlogIPage.getRecords().size());
+        return map;
+    }
+
+    @Override
+    public int countByTypeId(String typeId) {
+        QueryWrapper<TBlog> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("type_id", typeId);
+
+        Integer count = baseMapper.selectCount(queryWrapper);
+        return count;
     }
 }

@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -69,6 +70,17 @@ public class TBlogController {
             @ApiParam(name = "limit", value = "每页记录数", required = true)@PathVariable Long limit){
 
         Map<String, Object> blogItemsMap = tBlogService.findAllByPage(current, limit);
+        return  ReturnResult.ok().data("items", blogItemsMap);
+    }
+
+    @GetMapping("/findAllByTypeIdAndPage/{typeId}/{current}/{limit}")
+    @ApiOperation(value = "根据分类ID,分页查询所有博客")
+    public ReturnResult findAllByTypeID(
+            @ApiParam(name = "typeId", value = "分类ID", required = true)@PathVariable String typeId,
+            @ApiParam(name = "current", value = "当前页码", required = true)@PathVariable Long current,
+            @ApiParam(name = "limit", value = "每页记录数", required = true)@PathVariable Long limit){
+
+        Map<String, Object> blogItemsMap = tBlogService.findAllByTypeID(typeId, current, limit);
         return  ReturnResult.ok().data("items", blogItemsMap);
     }
 }
